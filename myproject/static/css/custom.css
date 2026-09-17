@@ -1,0 +1,17 @@
+.banner {
+    width: 100%;
+}
+
+.footer {
+    color: #fff;
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+    margin: 0px;
+}
+
+.navbar-brand .navbar-logo {
+    height: 70px !important;
+    width: 70px !important;
+    object-fit: contain;
+}

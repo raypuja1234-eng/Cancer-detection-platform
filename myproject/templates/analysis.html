@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+  <style>
+    body {
+      background-color: #ffffff;
+      /* White background */
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+    }
+
+    h2,
+    h3,
+    h4 {
+      font-weight: 600;
+      color: #00695c;
+    }
+
+    .page-title {
+      text-align: center;
+      font-weight: 700;
+      color: #004d40;
+      margin: 40px 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .model-card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+
+    .model-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, #009688, #26a69a);
+      color: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .img-fluid {
+      border-radius: 10px;
+      border: 2px solid #e0f2f1;
+    }
+
+    .footer {
+      text-align: center;
+      color: #fff;
+      /* White text */
+      background-color: #000;
+      /* Black background */
+      padding: 15px 0;
+      margin-top: 40px;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+
+
+    .section-divider {
+      width: 100px;
+      height: 4px;
+      background: #009688;
+      margin: 0 auto 30px auto;
+      border-radius: 2px;
+    }
+
+    .accuracy {
+      background: #e0f2f1;
+      border-left: 5px solid #009688;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #004d40;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% include "inc/menu.html" %}
+
+  <div class="container py-4">
+    <h2 class="page-title">Machine Learning Model Analysis</h2>
+    <div class="section-divider"></div>
+
+    <p class="text-center mb-5">
+      This section presents the performance comparison of different machine learning models
+      used in our Cancer Detection System. Each model’s <strong>Accuracy</strong>,
+      <strong>Confusion Matrix</strong>, and <strong>Classification Report</strong>
+      are shown to evaluate prediction performance and reliability.
+    </p>
+
+    <div class="row g-4">
+
+      <!-- KNN -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">K-Nearest Neighbors (KNN)</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>84%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'knn_cm.png' %}" class="img-fluid mb-3" alt="KNN Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'knncr_new.png' %}" class="img-fluid" alt="KNN Classification Report">
+          </div>
+        </div>
+      </div>
+
+      <!-- Naive Bayes -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">Naive Bayes</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>90%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'nav_cm.png' %}" class="img-fluid mb-3" alt="Naive Bayes Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'nav_cr.png' %}" class="img-fluid" alt="Naive Bayes Classification Report">
+          </div>
+        </div>
+      </div>
+
+      <!-- Logistic Regression -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">Logistic Regression</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>89.47%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'logis_cm.png' %}" class="img-fluid mb-3" alt="Logistic Regression Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'logcr_new.png' %}" class="img-fluid" alt="Logistic Regression Classification Report">
+          </div>
+        </div>
+      </div>
+
+      <!-- SVM -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">Support Vector Machine (SVM)</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>89.47%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'svm_cm.png' %}" class="img-fluid mb-3" alt="SVM Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'svmcr_new.png' %}" class="img-fluid" alt="SVM Classification Report">
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Tree -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">Decision Tree</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>82%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'dt_cmnew.png' %}" class="img-fluid mb-3" alt="Decision Tree Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'dt_crnew.png' %}" class="img-fluid" alt="Decision Tree Classification Report">
+          </div>
+        </div>
+      </div>
+
+      <!-- Random Forest -->
+      <div class="col-md-6">
+        <div class="card model-card">
+          <div class="card-header">Random Forest</div>
+          <div class="card-body">
+            <p class="accuracy">Accuracy: <strong>87%</strong></p>
+            <h5>Confusion Matrix</h5>
+            <img src="{% static 'rforest_cm.png' %}" class="img-fluid mb-3" alt="Random Forest Confusion Matrix">
+            <h5>Classification Report</h5>
+            <img src="{% static 'rforest_cr.png' %}" class="img-fluid" alt="Random Forest Classification Report">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <p class="footer">
+    🩺 Early Detection. Better Care.<br>
+    © 2026 Cancer Detection Platform
+  </p>
+
+</body>
+
+</html>

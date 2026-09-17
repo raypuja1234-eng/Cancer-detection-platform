@@ -1,0 +1,337 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us - Cancer Detection Platform</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+  <style>
+    .location-section {
+      text-align: center;
+      background: linear-gradient(135deg, #ffe6e6, #fff5f5);
+      padding: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 40px auto;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .location-section h2 {
+      color: #d63384;
+      font-family: "Poppins", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .map-container {
+      border: 4px solid #f8d7da;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+      display: block;
+    }
+
+    .address-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      display: inline-block;
+      text-align: left;
+    }
+
+    .address-box h4 {
+      color: #b91c1c;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .address-box p {
+      margin: 6px 0;
+      color: #444;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       CLICKABLE PHONE & EMAIL
+    ========================= */
+
+    .info-box a {
+      color: #d63384;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .info-box a:hover {
+      color: #b91c1c;
+      text-decoration: underline;
+    }
+
+
+    /* =========================
+       CONTACT INFO BOX
+    ========================= */
+
+    .info-box {
+      background: #ffffff;
+    }
+
+    .info-box h4 {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .info-box p {
+      color: #444;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       MEDICAL DISCLAIMER
+    ========================= */
+
+    .medical-disclaimer {
+      background: #fff8e7;
+      border-left: 5px solid #f0ad4e;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 30px 0;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .medical-disclaimer h5 {
+      color: #8a5a00;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .medical-disclaimer p {
+      color: #5f6368;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .map-container iframe {
+        height: 350px;
+      }
+
+      .medical-disclaimer {
+        margin: 20px 10px;
+        padding: 15px;
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- =========================
+       EXISTING MENU + LOGO
+  ========================= -->
+
+  {% include "inc/menu.html" %}
+
+
+  <!-- =========================
+       MAIN CONTACT SECTION
+  ========================= -->
+
+  <div class="container">
+
+    <div class="row">
+
+
+      <!-- =========================
+           CONTACT INFORMATION
+      ========================= -->
+
+      <div class="col-md-6">
+
+        <section class="contact-section py-5">
+
+          <div class="container text-center">
+
+            <h2 class="contact-heading mb-4">
+              💬 Get in Touch With Us
+            </h2>
+
+            <p class="contact-subtext mb-5">
+              Have questions, suggestions, or want to collaborate?
+              We’d love to connect with you!
+            </p>
+
+
+            <div class="row justify-content-center">
+
+              <div class="col-md-10">
+
+                <div class="info-box p-4 rounded-4 shadow-lg">
+
+                  <h4 class="mb-3">
+                    📞 Contact Information
+                  </h4>
+
+
+                  <!-- Location -->
+
+                  <p>
+                    <strong>Location:</strong>
+                    Kolkata, West Bengal, India
+                  </p>
+
+
+                  <!-- Phone -->
+
+                  <p>
+                    <strong>Phone:</strong>
+
+                    <a href="tel:+919856784321">
+                      +91 9856784321
+                    </a>
+
+                  </p>
+
+
+                  <!-- Email -->
+
+                  <p>
+                    <strong>Email:</strong>
+
+                    <a href="mailto:cancerdetectionplatform@gmail.com">
+                      cancerdetectionplatform@gmail.com
+                    </a>
+
+                  </p>
+
+
+                  <!-- Working Hours -->
+
+                  <p>
+                    <strong>Hours:</strong>
+                    Mon – Fri, 9:00 AM – 6:00 PM
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+
+      <!-- =========================
+           GOOGLE MAP
+      ========================= -->
+
+      <div class="col-md-6">
+
+        <br>
+        <br>
+
+        <h2>
+          📍 Our Location
+        </h2>
+
+
+        <div class="map-container">
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.35231277325!2d88.26495090163961!3d22.53540637448262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1789675463136!5m2!1sen!2sin"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!-- =========================
+         MEDICAL DISCLAIMER
+    ========================= -->
+
+    <div class="medical-disclaimer">
+
+      <h5>
+        ⚠️ Medical Disclaimer
+      </h5>
+
+      <p>
+        This Cancer Detection Platform is designed to assist with
+        cancer detection awareness and research. The results provided
+        by this platform are for informational purposes only and should
+        not be considered a medical diagnosis or a substitute for
+        professional medical advice, examination, or treatment.
+        Please consult a qualified healthcare professional for proper
+        diagnosis and medical guidance.
+      </p>
+
+    </div>
+
+
+    <br>
+    <br>
+
+    <!-- =========================
+         EXISTING FOOTER
+    ========================= -->
+
+    <p class="footer">
+
+      🩺 Early Detection. Better Care.
+      <br>
+
+      © 2026 Cancer Detection Platform
+
+    </p>
+
+  </div>
+
+
+</body>
+
+</html>
