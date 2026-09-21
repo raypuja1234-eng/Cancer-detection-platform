@@ -1,0 +1,413 @@
+.banner {
+    width: 100%;
+}
+
+.footer {
+    color: #fff;
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+    margin: 0px;
+}
+
+.navbar-brand .navbar-logo {
+    height: 70px !important;
+    width: 70px !important;
+    object-fit: contain;
+}
+
+/* =========================================
+   CANCER PREDICTION PAGE
+   ========================================= */
+
+.prediction-page {
+    min-height: calc(100vh - 170px);
+
+    padding: 55px 20px 70px;
+
+    background:
+        linear-gradient(135deg,
+            #f5f9ff 0%,
+            #eef5ff 50%,
+            #f8fbff 100%);
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.prediction-container {
+    width: 100%;
+    max-width: 760px;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   PAGE HEADING
+   ========================================= */
+
+.prediction-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.prediction-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e4f1ff;
+
+    color: #087fdf;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 8px 20px rgba(8, 127, 223, 0.10);
+}
+
+
+.prediction-heading h1 {
+    margin: 0;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #172b4d;
+}
+
+
+.prediction-heading p {
+    max-width: 570px;
+
+    margin: 10px auto 0;
+
+    color: #718096;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   PREDICTION CARD
+   ========================================= */
+
+.prediction-card {
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 35px 40px;
+
+    border: 1px solid #e3ebf5;
+
+    box-shadow:
+        0 15px 40px rgba(31, 66, 135, 0.10);
+}
+
+
+/* =========================================
+   CARD TITLE
+   ========================================= */
+
+.card-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #172b4d;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+.card-title i {
+    color: #087fdf;
+
+    font-size: 21px;
+}
+
+
+.card-subtitle {
+    margin-top: 5px;
+
+    margin-bottom: 28px;
+
+    color: #8792a2;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   INPUT FIELDS
+   ========================================= */
+
+.prediction-field {
+    margin-bottom: 24px;
+}
+
+
+.prediction-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #344054;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* Input wrapper */
+
+.input-wrapper {
+    position: relative;
+}
+
+
+/* Input icon */
+
+.input-wrapper>i {
+    position: absolute;
+
+    left: 17px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #087fdf;
+
+    font-size: 17px;
+
+    z-index: 2;
+}
+
+
+/* Input */
+
+.input-wrapper input {
+    height: 54px;
+
+    padding-left: 48px;
+
+    padding-right: 16px;
+
+    border-radius: 11px;
+
+    border: 1px solid #d8e1ec;
+
+    background: #fbfcfe;
+
+    color: #172b4d;
+
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Placeholder */
+
+.input-wrapper input::placeholder {
+    color: #a0a9b8;
+}
+
+
+/* Input focus */
+
+.input-wrapper input:focus {
+    background: #ffffff;
+
+    border-color: #087fdf;
+
+    box-shadow:
+        0 0 0 4px rgba(8, 127, 223, 0.10);
+
+    outline: none;
+}
+
+
+/* Field description */
+
+.field-help {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #98a2b3;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   PREDICTION BUTTON
+   ========================================= */
+
+.prediction-button {
+    width: 100%;
+
+    height: 54px;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(135deg,
+            #087fdf,
+            #075fc9);
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.prediction-button i {
+    margin-right: 8px;
+}
+
+
+.prediction-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(8, 127, 223, 0.25);
+}
+
+
+.prediction-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   DISCLAIMER
+   ========================================= */
+
+.prediction-note {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    padding: 17px 18px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #dfe7f1;
+
+    color: #667085;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* Disclaimer icon */
+
+.prediction-note>i {
+    color: #087fdf;
+
+    font-size: 19px;
+
+    margin-top: 2px;
+
+    flex-shrink: 0;
+}
+
+
+/* Disclaimer heading */
+
+.prediction-note strong {
+    color: #344054;
+}
+
+
+/* Disclaimer paragraphs */
+
+.prediction-note p {
+    margin: 5px 0 0;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .prediction-page {
+        padding: 40px 15px 55px;
+    }
+
+
+    .prediction-card {
+        padding: 28px 22px;
+
+        border-radius: 17px;
+    }
+
+
+    .prediction-heading h1 {
+        font-size: 27px;
+    }
+
+
+    .prediction-heading p {
+        font-size: 14px;
+    }
+
+
+    .prediction-icon {
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 24px;
+    }
+
+
+    .prediction-note {
+        padding: 15px;
+    }
+
+}
