@@ -88,6 +88,15 @@
 
           {% csrf_token %}
 
+          <!-- Error Message -->
+          {% if error %}
+          <div
+            style="background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.35); border-radius: 12px; padding: 14px 18px; margin-bottom: 24px; color: #f87171; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            {{ error }}
+          </div>
+          {% endif %}
+
 
           <!-- Radius Mean -->
 

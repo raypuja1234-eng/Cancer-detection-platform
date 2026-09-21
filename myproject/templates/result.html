@@ -1,0 +1,579 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancer Detection - Prediction Result</title>
+  <meta name="description" content="AI-powered cancer detection prediction result based on tumor measurements.">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+  <style>
+    /* =====================================================
+       RESULT PAGE — all dynamic colors via CSS variables
+       set on <body> by Django template (no template tags
+       inside CSS so formatters can't break them).
+       ===================================================== */
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0e1a;
+      min-height: 100vh;
+    }
+
+    .result-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background glow — colour comes from CSS var */
+    .result-page::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center,
+          var(--glow-primary) 0%,
+          var(--glow-secondary) 30%,
+          transparent 70%);
+      animation: pulseGlow 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+    }
+
+    .result-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    /* ---- Result Card ---- */
+    .result-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 48px 44px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ---- Status Badge ---- */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--accent);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-solid);
+      box-shadow: 0 0 8px var(--accent-solid);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* ---- Big Result Icon ---- */
+    .result-icon-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 48px;
+      position: relative;
+      background: var(--icon-bg);
+      border: 2px solid var(--icon-border);
+      color: var(--accent);
+    }
+
+    .result-icon-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--ripple-border);
+      animation: ripple 2s ease-out infinite;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* ---- Headings ---- */
+    .result-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+      text-align: center;
+    }
+
+    .result-subtitle {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* ---- Confidence Bar ---- */
+    .confidence-section {
+      margin-bottom: 36px;
+    }
+
+    .confidence-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .confidence-value {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--accent);
+    }
+
+    .confidence-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: var(--confidence-width);
+      background: var(--bar-gradient);
+      box-shadow: var(--bar-glow);
+      animation: fillBar 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fillBar {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: var(--confidence-width);
+      }
+    }
+
+    /* ---- Input Summary Grid ---- */
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .input-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .input-item:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .input-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 6px;
+    }
+
+    .input-item-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ---- Result Message ---- */
+    .result-message {
+      border-radius: 14px;
+      padding: 20px 22px;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      background: var(--msg-bg);
+      border: 1px solid var(--msg-border);
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .result-message .msg-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    /* ---- Action Buttons ---- */
+    .action-buttons {
+      display: flex;
+      gap: 14px;
+    }
+
+    .btn-retry {
+      flex: 1;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-retry:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary-action {
+      flex: 1;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      background: var(--btn-gradient);
+      box-shadow: var(--btn-shadow);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary-action:hover {
+      transform: translateY(-2px);
+      color: #fff;
+      box-shadow: var(--btn-hover-shadow);
+    }
+
+    /* ---- Disclaimer ---- */
+    .disclaimer {
+      margin-top: 28px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(251, 191, 36, 0.07);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+    }
+
+    .disclaimer i {
+      color: #fbbf24;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ---- Divider ---- */
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+      margin: 32px 0;
+    }
+
+    /* ---- Powered by ---- */
+    .powered-by {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      margin-top: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .powered-by span {
+      color: var(--powered-color);
+    }
+
+    @media (max-width: 520px) {
+      .result-card {
+        padding: 32px 24px;
+      }
+
+      .inputs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .result-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<!--
+  All dynamic colours are injected here as CSS custom properties.
+  Django template tags stay in HTML — formatters cannot touch them.
+-->
+
+<body style="
+  {% if is_malignant %}
+    --glow-primary:    rgba(220,38,38,0.12);
+    --glow-secondary:  rgba(239,68,68,0.05);
+    --badge-bg:        rgba(220,38,38,0.15);
+    --badge-border:    rgba(220,38,38,0.4);
+    --accent:          #f87171;
+    --accent-solid:    #ef4444;
+    --icon-bg:         rgba(239,68,68,0.12);
+    --icon-border:     rgba(239,68,68,0.3);
+    --ripple-border:   rgba(239,68,68,0.15);
+    --bar-gradient:    linear-gradient(90deg,#dc2626,#ef4444);
+    --bar-glow:        0 0 12px rgba(239,68,68,0.5);
+    --msg-bg:          rgba(220,38,38,0.08);
+    --msg-border:      rgba(220,38,38,0.25);
+    --btn-gradient:    linear-gradient(135deg,#dc2626,#b91c1c);
+    --btn-shadow:      0 8px 24px rgba(220,38,38,0.35);
+    --btn-hover-shadow:0 12px 32px rgba(220,38,38,0.45);
+    --powered-color:   rgba(248,113,113,0.6);
+  {% else %}
+    --glow-primary:    rgba(16,185,129,0.12);
+    --glow-secondary:  rgba(52,211,153,0.05);
+    --badge-bg:        rgba(16,185,129,0.15);
+    --badge-border:    rgba(16,185,129,0.4);
+    --accent:          #34d399;
+    --accent-solid:    #10b981;
+    --icon-bg:         rgba(52,211,153,0.12);
+    --icon-border:     rgba(52,211,153,0.3);
+    --ripple-border:   rgba(52,211,153,0.15);
+    --bar-gradient:    linear-gradient(90deg,#059669,#10b981);
+    --bar-glow:        0 0 12px rgba(16,185,129,0.5);
+    --msg-bg:          rgba(16,185,129,0.08);
+    --msg-border:      rgba(16,185,129,0.25);
+    --btn-gradient:    linear-gradient(135deg,#059669,#047857);
+    --btn-shadow:      0 8px 24px rgba(16,185,129,0.35);
+    --btn-hover-shadow:0 12px 32px rgba(16,185,129,0.45);
+    --powered-color:   rgba(52,211,153,0.6);
+  {% endif %}
+  --confidence-width: {{ confidence }}%;
+">
+
+  {% include "inc/menu.html" %}
+
+  <section class="result-page">
+    <div class="result-wrapper">
+
+      <div class="result-card">
+
+        <!-- Status Badge -->
+        <div class="text-center">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            ML Analysis Complete
+          </div>
+        </div>
+
+        <!-- Big Icon -->
+        <div class="result-icon-wrap">
+          {% if is_malignant %}
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          {% else %}
+          <i class="bi bi-shield-check"></i>
+          {% endif %}
+        </div>
+
+        <!-- Title -->
+        <h1 class="result-title">{{ result }}</h1>
+        <p class="result-subtitle">
+          {% if is_malignant %}
+          The tumor shows characteristics associated with malignancy.
+          {% else %}
+          The tumor shows characteristics consistent with a benign growth.
+          {% endif %}
+        </p>
+
+        <!-- Confidence -->
+        <div class="confidence-section">
+          <div class="confidence-label">
+            <span>Model Confidence</span>
+            <span class="confidence-value">{{ confidence }}%</span>
+          </div>
+          <div class="confidence-track">
+            <div class="confidence-fill"></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Input Values -->
+        <div class="inputs-grid">
+          <div class="input-item">
+            <div class="input-item-label">Radius Mean</div>
+            <div class="input-item-value">{{ radius_mean }}</div>
+          </div>
+          <div class="input-item">
+            <div class="input-item-label">Texture Mean</div>
+            <div class="input-item-value">{{ texture_mean }}</div>
+          </div>
+        </div>
+
+        <!-- Result Message -->
+        <div class="result-message">
+          {% if is_malignant %}
+          <div class="msg-title">High Priority — Please Consult a Doctor</div>
+          Based on the measurements provided (radius mean = {{ radius_mean }}, texture mean = {{ texture_mean }}),
+          the model predicts this tumor may be <strong>malignant</strong>. We strongly recommend consulting
+          a qualified oncologist or medical professional for a thorough clinical evaluation.
+          {% else %}
+          <div class="msg-title">Low Risk — Benign Indicator</div>
+          Based on the measurements provided (radius mean = {{ radius_mean }}, texture mean = {{ texture_mean }}),
+          the model predicts this tumor appears <strong>benign</strong>. Continue regular health screenings
+          and consult your doctor to confirm with clinical tests.
+          {% endif %}
+        </div>
+
+        <!-- Actions -->
+        <div class="action-buttons">
+          <a href="/prediction/" class="btn-retry">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Try Again
+          </a>
+          <a href="/" class="btn-primary-action">
+            <i class="bi bi-house-fill"></i>
+            Home
+          </a>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <i class="bi bi-shield-exclamation"></i>
+          <div>
+            <strong style="color: rgba(251,191,36,0.9);">Medical Disclaimer:</strong>
+            This prediction is generated by a machine learning model for educational purposes only
+            and is <strong>not a substitute for professional medical diagnosis</strong>. Always consult
+            a licensed healthcare provider for medical advice.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Powered by -->
+      <div class="powered-by">
+        Powered by <span>SVM &middot; Scikit-Learn</span> &nbsp;&middot;&nbsp; Cancer Detection Platform &copy; 2026
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
