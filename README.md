@@ -2,22 +2,35 @@
 
 **An AI-powered web application for breast cancer prediction using Machine Learning.**
 
+## 🌍 Live Demo
+
+🔗 https://cancer-detection-platform.onrender.com
+
+
 ## 📌 About
 
-Cancer Detection Platform is a **Django-based web application** that uses a trained **Support Vector Machine (SVM)** model to classify breast tumors as **Malignant** or **Benign** based on diagnostic measurements.
+Cancer Detection Platform is a full-stack web application that bridges the gap between machine learning and healthcare. It uses a trained Support Vector Machine (SVM) model to predict whether a breast tumor is Malignant or Benign — based on real diagnostic measurements — and displays the result along with a confidence percentage.
 
-## ✨ Features
+Early detection is one of the most powerful tools in fighting cancer. This platform is designed to make that detection accessible, fast, and understandable for anyone.
 
-* 🤖 SVM-based cancer prediction
-* 📊 Prediction confidence score
-* 🌐 Multi-page Django website
-* 📱 Responsive Bootstrap 5 design
-* 📊 Analysis and awareness sections
-* ☁️ Deployed on Render
+✨ Features
+🔬 ML-Powered Prediction — SVM model trained on the Breast Cancer Wisconsin Dataset
+📊 Confidence Score — Displays probability percentage alongside each diagnosis
+🌐 Multi-Page Web App — Home, About, Analysis, Prediction, Result, Our Team, Contact
+🎠 Cancer Awareness Carousel — Interactive tips on prevention and healthy habits
+📱 Responsive Design — Built with Bootstrap 5, works on all screen sizes
+☁️ Live Deployment — Hosted on Render with WhiteNoise static file serving
 
 ## 🛠️ Tech Stack
 
-**Python • Django • Scikit-learn • Pandas • NumPy • Bootstrap 5 • SQLite • WhiteNoise • Render**
+Backend  -	Django 5.2 (Python)
+ML Model  -	scikit-learn · SVM (Linear Kernel)
+Data Processing  -	pandas · NumPy
+Model Serialization	 -  joblib
+Frontend -	Bootstrap 5 · HTML5 · CSS3
+Database  -	SQLite3
+Static Files -  WhiteNoise
+Deployment -	Render
 
 ## 🧠 How It Works
 
@@ -32,10 +45,6 @@ Malignant / Benign
     ↓
 Confidence Score
 ```
-
-## 🌍 Live Demo
-
-🔗 https://cancer-detection-platform.onrender.com
 
 ## ⚠️ Disclaimer
 
