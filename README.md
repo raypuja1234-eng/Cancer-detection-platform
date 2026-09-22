@@ -33,18 +33,6 @@ Malignant / Benign
 Confidence Score
 ```
 
-## 🚀 Run Locally
-
-```bash
-git clone https://github.com/your-username/cancer-detection-platform.git
-cd cancer-detection-platform
-pip install -r requirements.txt
-python train_model.py
-python manage.py runserver
-```
-
-Open **http://127.0.0.1:8000/** in your browser.
-
 ## 🌍 Live Demo
 
 🔗 https://cancer-detection-platform.onrender.com
