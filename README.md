@@ -23,13 +23,13 @@ Early detection is one of the most powerful tools in fighting cancer. This platf
 
 ## 🛠️ Tech Stack
 
-Backend  -	Django 5.2 (Python)
-ML Model  -	scikit-learn · SVM (Linear Kernel)
-Data Processing  -	pandas · NumPy
-Model Serialization	 -  joblib
-Frontend -	Bootstrap 5 · HTML5 · CSS3
-Database  -	SQLite3
-Static Files -  WhiteNoise
+Backend  -	Django 5.2 (Python) <br>
+ML Model  -	scikit-learn · SVM (Linear Kernel) <br>
+Data Processing  -	pandas · NumPy <br>
+Model Serialization	 -  joblib <br>
+Frontend -	Bootstrap 5 · HTML5 · CSS3 <br>
+Database  -	SQLite3 <br>
+Static Files -  WhiteNoise  <br>
 Deployment -	Render
 
 ## 🧠 How It Works
